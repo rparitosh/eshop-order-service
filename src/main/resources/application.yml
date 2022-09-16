@@ -1,0 +1,18 @@
+server:
+  port: 9012
+
+spring:
+  application:
+    name: product-service
+
+  datasource:
+    url: jdbc:mysql://mysql-service/eshop-order?useSSL=false&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect

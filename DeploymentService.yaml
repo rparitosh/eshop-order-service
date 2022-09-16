@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service-deployment
+  labels:
+    app: order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+      - name: order-service
+        image: rparitosh/order-service:LATEST
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 9012
+        env:
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: mysql_username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: mysql_password
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  selector:
+    app: order-service
+  ports:
+  - port: 9012
+    targetPort: 9012
+    nodePort: 30012
+    name: http
+  type: NodePort
+
+
+          
+    
+    
+
