@@ -1,4 +1,4 @@
 FROM openjdk:17-alpine
-COPY target/product-service-1.0.jar product-service.jar
+COPY target/order-service-1.0.jar order-service.jar
 EXPOSE 9011
-ENTRYPOINT ["java","-jar","/product-service.jar"]
+ENTRYPOINT ["java","-jar","/order-service.jar"]
